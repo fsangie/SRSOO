@@ -58,16 +58,32 @@
         });
 
         loadSchedule();
-    });    //从服务器加载选课列表    function loadSchedule() {
+        LoadStudentInfo();
+
+    });
+    //从服务器加载选课列表
+    function loadSchedule() {
         $.post(
             "selectCourse.aspx?Action=LoadSchedule",
             function (reslut) {
                 var json = $.parseJSON(reslut);
                 liger.get("listbox1").setData(json);
+            }
+        );
+    }
+    //从服务器加载当前登陆学生已选课程
+    function LoadStudentInfo() {
+        $.post(
+            "selectCourse.aspx?Action=LoadStudentInfo",
+            function (reslut) {
+                var json = $.parseJSON(reslut);
+                $.ligerui.get("ID").setValue(json.Id);
+                $.ligerui.get("StudentName").setValue(json.Name);
+                liger.get("listbox2").setData(json.Attends);
                 
             }
         );
-    }    //从服务器加载当前登陆学生已选课程    function loadResigistion() {
+    }    function loadResigistion() {
     }    function moveToLeft() {
         var box1 = liger.get("listbox1"), box2 = liger.get("listbox2");
         var selecteds = box2.getSelectedItems();

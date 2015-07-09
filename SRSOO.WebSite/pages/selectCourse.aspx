@@ -80,6 +80,11 @@
                 $.ligerui.get("ID").setValue(json.Id);
                 $.ligerui.get("StudentName").setValue(json.Name);
                 liger.get("listbox2").setData(json.Attends);
+                var m = json.Attends, count = 0;
+                for (var o in m) {
+                    if (m[o]) { count++ }
+                };
+                $.ligerui.get("TotalCourse").setValue(count);
                 
             }
         );
